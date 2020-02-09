@@ -1,0 +1,11 @@
+@import "./normalize.css";
+
+@import "./fonts.scss";
+
+$main-color: #26b856;
+
+body {
+  #root {
+    color: $main-color;
+  }
+}
