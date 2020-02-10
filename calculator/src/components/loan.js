@@ -49,10 +49,10 @@ class Loan extends React.Component {
         />
         {this.renderAprInput()}
         <br/>
-        <ul>
+        <ul style={{ display: 'flex', listStyle: 'none' }}>
           Terms: {TermsButtonsList}
         </ul>
-        <ul>
+        <ul style={{ display: 'flex', listStyle: 'none' }}>
           Credit Score: {CreditScoresButtonsList}
         </ul>
       </form>
