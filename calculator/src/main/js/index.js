@@ -17,28 +17,29 @@ import { getTaxes, calculateLoanMonthlyPayment, calculateLeaseMonthlyPayment } f
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
-
+    // debugger;
     this.state = {
-      downPayment: 0,
-      tradeIn: 0,
-      apr: 0,
-      loanPostCode: null,
-      leasePostCode: null,
-      loanTerm: 24,
-      leaseTerm: 36,
-      creditScore: 750,
-      mileages: 12000,
-      isLoan: true,
+      downPayment: JSON.parse(localStorage.getItem('downPayment')) || 0,
+      tradeIn: JSON.parse(localStorage.getItem('tradeIn')) || 0,
+      apr: JSON.parse(localStorage.getItem('apr')) || 0,
+      loanPostCode: JSON.parse(localStorage.getItem('loanPostCode')) || null,
+      leasePostCode: JSON.parse(localStorage.getItem('leasePostCode')) || null,
+      loanTerm: JSON.parse(localStorage.getItem('loanTerm')) || 24,
+      leaseTerm: JSON.parse(localStorage.getItem('leaseTerm')) || 36,
+      creditScore: JSON.parse(localStorage.getItem('creditScore')) || 750,
+      mileages: JSON.parse(localStorage.getItem('mileages')) || 12000,
+      isLoan: (JSON.parse(localStorage.getItem('isLoan')) === undefined || JSON.parse(localStorage.getItem('isLoan'))),
       error: null,
-      isLoading: true,
-      infoCardData: null,
-      monthlyPayment: null,
-      taxes: null,
+      isLoading: (JSON.parse(localStorage.getItem('isLoading')) === undefined || JSON.parse(localStorage.getItem('isLoading'))),
+      infoCardData: JSON.parse(localStorage.getItem('infoCardData')) || null,
+      monthlyPayment: JSON.parse(localStorage.getItem('monthlyPayment')) || null,
+      taxes: JSON.parse(localStorage.getItem('taxes')) || null,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.toggleState = this.toggleState.bind(this);
+    this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
   handleChange(evt) {
@@ -80,6 +81,7 @@ class Calculator extends React.Component {
             leasePostCode: data.postal,
             infoCardData: mochData,
             isLoading: false,
+            error: null,
           },
         );
         // const monthlyPayment = await this.calculateMonthlyPayment();
@@ -136,11 +138,24 @@ class Calculator extends React.Component {
     }
   }
 
-  componentDidMount() {
-    const token = '6ec8da2c7f1243';
-    const serviceURL = `https://ipinfo.io/json?token=${token}`;
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.saveStateToLocalStorage);
+  }
 
-    this.loadData(serviceURL);
+  saveStateToLocalStorage() {
+    Object.keys(this.state).forEach((stateKey) => {
+      localStorage.setItem(stateKey, JSON.stringify(this.state[stateKey]));
+    });
+  }
+
+  componentDidMount() {
+    if (this.state.isLoading) {
+      const token = '6ec8da2c7f1243';
+      const serviceURL = `https://ipinfo.io/json?token=${token}`;
+      this.loadData(serviceURL);
+    }
+
+    window.addEventListener('beforeunload', this.saveStateToLocalStorage);
     // const monthlyPayment = await this.calculateMonthlyPayment();
     // this.setState({ monthlyPayment });
 
