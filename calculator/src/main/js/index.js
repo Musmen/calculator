@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import Loan from '../../components/loan';
 import Lease from '../../components/lease';
 import InfoCard from '../../components/infoCard';
+import FolderButton from '../../components/folderButton';
 
 import MOCH_INFO_CARD_DATA from './data/mochInfoCardData';
 import { getTaxes, calculateLoanMonthlyPayment, calculateLeaseMonthlyPayment } from './data/utils';
@@ -164,18 +165,18 @@ class Calculator extends React.Component {
     //   );
   }
 
-  folderButton(isLoan) {
-    return (
-      <button
-        type = 'button'
-        value = {!isLoan}
-        name = 'isLoan'
-        onClick = {this.toggleState}
-      >
-        {isLoan ? 'Lease' : 'Loan'}
-      </button>
-    );
-  }
+  // folderButton(isLoan) {
+  //   return (
+  //     <button
+  //       type = 'button'
+  //       value = {!isLoan}
+  //       name = 'isLoan'
+  //       onClick = {this.toggleState}
+  //     >
+  //       {isLoan ? 'Lease' : 'Loan'}
+  //     </button>
+  //   );
+  // }
 
   render() {
     const {
@@ -245,7 +246,10 @@ class Calculator extends React.Component {
 
     return (
       <div>
-        {this.folderButton(isLoan)}
+        <FolderButton
+          isLoan={isLoan}
+          handleClick={this.toggleState}
+        />
         {mainFolder}
         <br/>
         <InfoCard

@@ -1,16 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 function InfoCard(props) {
+  const {
+    msrp, vehicleName, dealer, taxes, monthlyPayment,
+  } = props;
+
   return (
     <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-      <p>{props.msrp}</p>
-      <p>{props.vehicleName}</p>
-      <p>{props.dealer.name}</p>
-      <p>{props.dealer.phone}</p>
-      <p>{props.dealer.rating}</p>
-      <p>{props.taxes}</p>
-      <p>{props.monthlyPayment}</p>
+      <p>{msrp}</p>
+      <p>{vehicleName}</p>
+      <p>{dealer.name}</p>
+      <p>{dealer.phone}</p>
+      <p>{dealer.rating}</p>
+      <p>{taxes}</p>
+      <p>{monthlyPayment}</p>
     </div>
   );
 }
