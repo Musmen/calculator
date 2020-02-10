@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import Loan from '../../components/loan';
 import Lease from '../../components/lease';
 import InfoCard from '../../components/infoCard';
-import FolderButton from '../../components/folderButton';
+import FolderButtons from '../../components/folderButtons';
 
 import MOCH_INFO_CARD_DATA from './data/mochInfoCardData';
 import { getTaxes, calculateLoanMonthlyPayment, calculateLeaseMonthlyPayment } from './data/utils';
@@ -246,7 +246,7 @@ class Calculator extends React.Component {
 
     return (
       <div>
-        <FolderButton
+        <FolderButtons
           isLoan={isLoan}
           handleClick={this.toggleState}
         />
