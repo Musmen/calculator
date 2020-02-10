@@ -9,6 +9,7 @@ import Loan from '../../components/loan';
 import Lease from '../../components/lease';
 import InfoCard from '../../components/infoCard';
 import FolderButtons from '../../components/folderButtons';
+import Spinner from '../../components/spinner';
 
 import MOCH_INFO_CARD_DATA from './data/mochInfoCardData';
 import { getTaxes, calculateLoanMonthlyPayment, calculateLeaseMonthlyPayment } from './data/utils';
@@ -190,7 +191,8 @@ class Calculator extends React.Component {
       return <div>{`Stop! ${error}`}</div>;
     }
     if (isLoading) {
-      return <div>Loading...</div>;
+      // return <div>Loading...</div>;
+      return <Spinner/>;
     }
     // this.calculateMonthlyPayment().then(
     //   (value) => {
