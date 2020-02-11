@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import InputList from './inputList';
 import Select from './select';
@@ -9,7 +9,7 @@ class Lease extends React.Component {
     const termList = [24, 36, 48];
     const mileagesList = [10000, 12000, 15000];
     const creditScoreList = [600, 650, 700, 750, 800, 850, 900];
-// todo заменить везде длинные this.props на деструктор и простые переменные
+    // todo заменить везде длинные this.props на деструктор и простые переменные
     const TermsSelect = <Select
       valueList = {termList}
       propertyName = 'leaseTerm'
@@ -36,7 +36,6 @@ class Lease extends React.Component {
         <InputList
           tradeIn = {this.props.tradeIn}
           downPayment = {this.props.downPayment}
-          apr = {this.props.apr}
           leasePostCode = {this.props.leasePostCode}
           handleChange = {this.props.handleChange}
           folder='lease'
@@ -52,5 +51,16 @@ class Lease extends React.Component {
     );
   }
 }
+
+Lease.propTypes = {
+  downPayment: PropTypes.number.isRequired,
+  tradeIn: PropTypes.number.isRequired,
+  leasePostCode: PropTypes.number.isRequired,
+  term: PropTypes.number.isRequired,
+  mileages: PropTypes.number.isRequired,
+  creditScore: PropTypes.number.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  validationError: PropTypes.object,
+};
 
 export default Lease;

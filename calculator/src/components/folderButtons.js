@@ -1,17 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function FolderButtons(props) {
   const { isLoan, handleClick } = props;
 
   return (
-    // <button
-    //   type = 'button'
-    //   value = {!isLoan}
-    //   name = 'isLoan'
-    //   onClick = {handleClick}
-    // >
-    //   {isLoan ? 'Lease' : 'Loan'}
-    // </button>
     <>
       <button
         type = 'button'
@@ -34,5 +27,10 @@ function FolderButtons(props) {
     </>
   );
 }
+
+FolderButtons.propTypes = {
+  isLoan: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default FolderButtons;

@@ -1,5 +1,7 @@
+import './loan.scss';
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import InputList from './inputList';
 import ButtonsList from './buttonsList';
@@ -9,8 +11,9 @@ class Loan extends React.Component {
     return (
       <>
       <p>
-        <label>
+        <label className = 'label'>
           Apr<br/>
+          <span className = 'beforeSign'>%</span>
           <input
             className = 'input loan--input loan--input-apr'
             type = 'number'
@@ -69,5 +72,17 @@ class Loan extends React.Component {
     );
   }
 }
+
+Loan.propTypes = {
+  downPayment: PropTypes.number.isRequired,
+  tradeIn: PropTypes.number.isRequired,
+  loanPostCode: PropTypes.number.isRequired,
+  apr: PropTypes.number.isRequired,
+  term: PropTypes.number.isRequired,
+  creditScore: PropTypes.number.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  validationError: PropTypes.object,
+};
 
 export default Loan;

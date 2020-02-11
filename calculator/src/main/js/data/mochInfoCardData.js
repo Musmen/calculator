@@ -8,5 +8,4 @@ const MOCH_INFO_CARD_DATA = {
   },
 };
 
-// export default MOCH_INFO_CARD_DATA;
 export default Promise.resolve(MOCH_INFO_CARD_DATA);

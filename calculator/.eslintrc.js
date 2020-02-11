@@ -4,13 +4,14 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  ecmaFeatures: {
-    jsx: true,
-    modules: true,
-    classes: true
-  },
+  // ecmaFeatures: {
+  //   jsx: true,
+  //   modules: true,
+  //   classes: true
+  // },
   extends: [
     'airbnb-base',
+    'plugin:react/recommended'
   ],
   plugins: ['react'],
   globals: {
@@ -21,6 +22,11 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   rules: {
-  }
+  },
 };
