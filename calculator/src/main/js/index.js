@@ -13,6 +13,7 @@ import Spinner from '../../components/spinner';
 
 import MOCH_INFO_CARD_DATA from './data/mochInfoCardData';
 import { getTaxes, calculateLoanMonthlyPayment, calculateLeaseMonthlyPayment } from './data/utils';
+import STATE_NAME_TO_STRING_NAME from './data/helper';
 
 class Calculator extends React.Component {
   constructor(props) {
@@ -28,25 +29,51 @@ class Calculator extends React.Component {
       leaseTerm: JSON.parse(localStorage.getItem('leaseTerm')) || 36,
       creditScore: JSON.parse(localStorage.getItem('creditScore')) || 750,
       mileages: JSON.parse(localStorage.getItem('mileages')) || 12000,
-      isLoan: (JSON.parse(localStorage.getItem('isLoan')) === undefined || JSON.parse(localStorage.getItem('isLoan'))),
+      isLoan: ((JSON.parse(localStorage.getItem('isLoan')) !== false) || false),
       error: null,
-      isLoading: (JSON.parse(localStorage.getItem('isLoading')) === undefined || JSON.parse(localStorage.getItem('isLoading'))),
+      isLoading: ((JSON.parse(localStorage.getItem('isLoading')) !== false) || false),
       infoCardData: JSON.parse(localStorage.getItem('infoCardData')) || null,
       monthlyPayment: JSON.parse(localStorage.getItem('monthlyPayment')) || null,
       taxes: JSON.parse(localStorage.getItem('taxes')) || null,
+      validationError: {},
     };
+
+    // const { downPayment, tradeIn } = this.state;
+    // this.validateField('downPayment', this.state.downPayment);
+    // this.validateField('tradeIn', this.state.tradeIn);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.toggleState = this.toggleState.bind(this);
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
+    this.validateField = this.validateField.bind(this);
+    this.validateInput = this.validateInput.bind(this);
+  }
+
+  validateInput() {
+    const { validationError } = this.state;
+    return !(validationError.downPayment || validationError.tradeIn);
+  }
+
+  validateField(fieldName, value) {
+    if (!['downPayment', 'tradeIn'].includes(fieldName)) return;
+
+    const maxValue = this.state.infoCardData.msrp / 4;
+    const errorMessage = `Value of ${STATE_NAME_TO_STRING_NAME[fieldName]}
+      can’t be greater than 1/4 * MSRP = ${Math.round(maxValue)}`;
+    const { validationError } = this.state;
+
+    validationError[fieldName] = (value > maxValue) ? errorMessage : false;
+    this.setState({ validationError });
   }
 
   handleChange(evt) {
     const stateName = evt.target.name;
     console.log(`Previous: ${this.state[evt.target.name]}`);
 
-    this.setState({ [evt.target.name]: +evt.target.value });
+    // this.setState({ [evt.target.name]: +evt.target.value });
+    this.setState({ [evt.target.name]: +evt.target.value },
+      this.validateField(evt.target.name, evt.target.value));
     setTimeout(() => {
       console.log(`New: ${this.state[stateName]}`);
     }, 0);
@@ -57,6 +84,8 @@ class Calculator extends React.Component {
     console.log(`Previous: ${this.state[evt.target.name]}`);
 
     this.setState({ [evt.target.name]: evt.target.value });
+    // this.setState({ [evt.target.name]: evt.target.value },
+    //   this.validateField(evt.target.name, evt.target.value));
 
     setTimeout(() => {
       console.log(`New: ${this.state[stateName]}`);
@@ -129,6 +158,9 @@ class Calculator extends React.Component {
   }
 
   async componentDidUpdate(prevProps, previousState) {
+    const isValid = this.validateInput();
+    if (!isValid) return;
+
     if (JSON.stringify(this.state) !== JSON.stringify(previousState)) {
       const monthlyPayment = await this.calculateMonthlyPayment();
       // this.monthlyPayment = await this.calculateMonthlyPayment();
@@ -154,6 +186,10 @@ class Calculator extends React.Component {
       const serviceURL = `https://ipinfo.io/json?token=${token}`;
       this.loadData(serviceURL);
     }
+
+    const { downPayment, tradeIn } = this.state;
+    this.validateField('downPayment', downPayment);
+    this.validateField('tradeIn', tradeIn);
 
     window.addEventListener('beforeunload', this.saveStateToLocalStorage);
     // const monthlyPayment = await this.calculateMonthlyPayment();
@@ -198,6 +234,7 @@ class Calculator extends React.Component {
     const {
       downPayment, tradeIn, apr, loanPostCode, leasePostCode, loanTerm, leaseTerm,
       creditScore, mileages, isLoan, error, isLoading, infoCardData, monthlyPayment, taxes,
+      validationError,
     } = this.state;
 
     // let { monthlyPayment } = this.state;
@@ -205,6 +242,10 @@ class Calculator extends React.Component {
     if (error) {
       return <div>{`Stop! ${error}`}</div>;
     }
+    // debugger;
+    // if (!this.validateInput()) {
+    //   return <div>{`Not valid! ${validationError.downPayment || validationError.tradeIn}`}</div>;
+    // }
     if (isLoading) {
       // return <div>Loading...</div>;
       return <Spinner/>;
@@ -238,6 +279,7 @@ class Calculator extends React.Component {
         creditScore = {creditScore}
         handleChange = {this.handleChange}
         handleClick = {this.handleClick}
+        validationError = {validationError}
         // handleCreditScoreBtnClick = {this.handleCreditScoreBtnClick}
       />;
     } else {
@@ -258,6 +300,7 @@ class Calculator extends React.Component {
         mileages = {mileages}
         creditScore = {creditScore}
         handleChange = {this.handleChange}
+        validationError = {validationError}
       />;
     }
 

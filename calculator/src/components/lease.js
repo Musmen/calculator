@@ -40,6 +40,7 @@ class Lease extends React.Component {
           leasePostCode = {this.props.leasePostCode}
           handleChange = {this.props.handleChange}
           folder='lease'
+          validationError = {this.props.validationError}
         />
         <br/>Terms:<br/>
         {TermsSelect}

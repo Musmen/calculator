@@ -46,6 +46,7 @@ class Loan extends React.Component {
           loanPostCode = {this.props.loanPostCode}
           handleChange = {this.props.handleChange}
           folder = 'loan'
+          validationError = {this.props.validationError}
         />
         {this.renderAprInput()}
         <br/>
