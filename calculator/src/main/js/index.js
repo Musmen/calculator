@@ -18,7 +18,7 @@ import STATE_NAME_TO_STRING_NAME from './data/helper';
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    // debugger;
+    debugger;
     this.state = {
       downPayment: JSON.parse(localStorage.getItem('downPayment')) || 0,
       tradeIn: JSON.parse(localStorage.getItem('tradeIn')) || 0,
@@ -32,7 +32,7 @@ class Calculator extends React.Component {
       isLoan: ((JSON.parse(localStorage.getItem('isLoan')) !== false) || false),
       error: null,
       isLoading: ((JSON.parse(localStorage.getItem('isLoading')) !== false) || false),
-      infoCardData: JSON.parse(localStorage.getItem('infoCardData')) || null,
+      infoCardData: JSON.parse(localStorage.getItem('infoCardData')) || { msrp: 0 },
       monthlyPayment: JSON.parse(localStorage.getItem('monthlyPayment')) || null,
       taxes: JSON.parse(localStorage.getItem('taxes')) || null,
       validationError: {},
@@ -59,8 +59,7 @@ class Calculator extends React.Component {
     if (!['downPayment', 'tradeIn'].includes(fieldName)) return;
 
     const maxValue = this.state.infoCardData.msrp / 4;
-    const errorMessage = `Value of ${STATE_NAME_TO_STRING_NAME[fieldName]}
-      can’t be greater than 1/4 * MSRP = ${Math.round(maxValue)}`;
+    const errorMessage = `value can’t be greater than ${Math.round(maxValue)} (1/4 * MSRP)`;
     const { validationError } = this.state;
 
     validationError[fieldName] = (value > maxValue) ? errorMessage : false;

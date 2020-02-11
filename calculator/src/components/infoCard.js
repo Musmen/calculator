@@ -13,7 +13,7 @@ function InfoCard(props) {
       <p>{dealer.phone}</p>
       <p>{dealer.rating}</p>
       <p>{taxes}</p>
-      <p>{monthlyPayment}</p>
+      <p>{`Monthly Payment: ${monthlyPayment}$`}</p>
     </div>
   );
 }

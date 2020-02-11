@@ -1,0 +1,21 @@
+.error {
+  color: red;
+}
+
+.label {
+  position: relative;
+}
+
+.loan--input-downPayment,
+.loan--input-tradeIn,
+.lease--input-downPayment,
+.lease--input-tradeIn {
+  padding-left: 20px;
+}
+
+.currencySign {
+  position: absolute;
+  left: 5px;
+  top: 21px;
+  z-index: 2;
+}

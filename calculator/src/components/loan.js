@@ -7,14 +7,23 @@ import ButtonsList from './buttonsList';
 class Loan extends React.Component {
   renderAprInput() {
     return (
-      <input
-        className = 'input loan--input loan--input-apr'
-        type = 'number'
-        value = {this.props.apr}
-        name = 'apr'
-        onChange = {this.props.handleChange}
-      >
-      </input>
+      <>
+      <p>
+        <label>
+          Apr<br/>
+          <input
+            className = 'input loan--input loan--input-apr'
+            type = 'number'
+            value = {this.props.apr}
+            name = 'apr'
+            onChange = {this.props.handleChange}
+            min = {0}
+            max = {999999999}
+          >
+          </input>
+        </label>
+      </p>
+      </>
     );
   }
 
