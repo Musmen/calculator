@@ -1,3 +1,5 @@
+import './folderButtons.scss';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,6 +14,7 @@ function FolderButtons(props) {
         name = 'isLoan'
         onClick = {handleClick}
         disabled = {isLoan}
+        className = 'folder_button'
       >
         Loan
       </button>
@@ -21,6 +24,7 @@ function FolderButtons(props) {
         name = 'isLoan'
         onClick = {handleClick}
         disabled = {!isLoan}
+        className = 'folder_button'
       >
         Lease
       </button>

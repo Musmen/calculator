@@ -2,7 +2,6 @@ import React from 'react';
 
 function AprInput(apr, onChange) {
   return (
-    <>
     <p>
       <label className = 'label'>
         Apr<br/>
@@ -14,12 +13,9 @@ function AprInput(apr, onChange) {
           name = 'apr'
           onChange = {onChange}
           min = {0}
-          max = {999999999}
-        >
-        </input>
+        />
       </label>
     </p>
-    </>
   );
 }
 

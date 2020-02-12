@@ -1,0 +1,18 @@
+.folder_button {
+  width: 50%;
+  height: 100%;
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: white;
+    background-color: rgb(83, 75, 75);
+    outline-color: white;
+  }
+
+  &:disabled{
+    color: inherit;
+    background-color: inherit;
+    outline-color: inherit;
+  }
+}

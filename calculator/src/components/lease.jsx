@@ -1,3 +1,5 @@
+import './lease.scss';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,7 +11,7 @@ class Lease extends React.Component {
     const termList = [24, 36, 48];
     const mileagesList = [10000, 12000, 15000];
     const creditScoreList = [600, 650, 700, 750, 800, 850, 900];
-    // todo заменить везде длинные this.props на деструктор и простые переменные
+
     const TermsSelect = <Select
       valueList = {termList}
       propertyName = 'leaseTerm'
@@ -32,7 +34,7 @@ class Lease extends React.Component {
     />;
 
     return (
-      <form>
+      <div className = 'lease_container'>
         <InputList
           tradeIn = {this.props.tradeIn}
           downPayment = {this.props.downPayment}
@@ -41,13 +43,22 @@ class Lease extends React.Component {
           folder='lease'
           validationError = {this.props.validationError}
         />
-        <br/>Terms:<br/>
-        {TermsSelect}
-        <br/>Mileages:<br/>
-        {MileagesSelect}
-        <br/>CreditScore:<br/>
-        {CreditScoresSelect}
-      </form>
+
+        <div className = 'select_container'>
+          <p>
+            Terms:<br/>
+            {TermsSelect}
+          </p>
+          <p>
+            Mileages:<br/>
+            {MileagesSelect}
+          </p>
+          <p>
+            CreditScore:<br/>
+            {CreditScoresSelect}
+          </p>
+        </div>
+      </div>
     );
   }
 }

@@ -18,7 +18,7 @@ import { getTaxes, calculateLoanMonthlyPayment, calculateLeaseMonthlyPayment } f
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    debugger;
+
     this.state = {
       downPayment: JSON.parse(localStorage.getItem('downPayment')) || 0,
       tradeIn: JSON.parse(localStorage.getItem('tradeIn')) || 0,
@@ -55,7 +55,7 @@ class Calculator extends React.Component {
     if (!['downPayment', 'tradeIn'].includes(fieldName)) return;
 
     const maxValue = this.state.infoCardData.msrp / 4;
-    const errorMessage = `value can’t be greater than ${Math.round(maxValue)} (1/4 * MSRP)`;
+    const errorMessage = ` not > ${Math.round(maxValue)} (¼ MSRP)`;
     const { validationError } = this.state;
 
     validationError[fieldName] = (value > maxValue) ? errorMessage : false;
@@ -150,7 +150,9 @@ class Calculator extends React.Component {
 
   saveStateToLocalStorage() {
     Object.keys(this.state).forEach((stateKey) => {
-      localStorage.setItem(stateKey, JSON.stringify(this.state[stateKey]));
+      if (this.state[stateKey] !== undefined) {
+        localStorage.setItem(stateKey, JSON.stringify(this.state[stateKey]));
+      }
     });
   }
 
@@ -175,8 +177,8 @@ class Calculator extends React.Component {
       validationError,
     } = this.state;
 
-    if (error) { // !todo! styles for Error Message!
-      return <div>{`Stop! ${error}`}</div>;
+    if (error) {
+      return <div className = 'error_message'>{`Stop! ${error}`}</div>;
     }
 
     if (isLoading) {
@@ -212,21 +214,30 @@ class Calculator extends React.Component {
     }
 
     return (
-      <div>
-        <FolderButtons
-          isLoan={isLoan}
-          handleClick={this.toggleState}
-        />
-        {mainFolder}
-        <br/>
-        <InfoCard
-          msrp = {infoCardData.msrp}
-          vehicleName = {infoCardData.vehicleName}
-          dealer = {infoCardData.dealer}
-          taxes = {taxes}
-          monthlyPayment = {monthlyPayment}
-        />
-      </div>
+      <form className = 'calculator'>
+        <fieldset className = 'folder_buttons_container'>
+          <FolderButtons
+            isLoan={isLoan}
+            handleClick={this.toggleState}
+          />
+        </fieldset>
+
+        <fieldset className = 'main_folder'>
+          <legend>Enter values for monthly payment:</legend>
+          {mainFolder}
+        </fieldset>
+
+        <fieldset className = 'info_card'>
+          <legend>Dealer Info:</legend>
+          <InfoCard
+            msrp = {infoCardData.msrp}
+            vehicleName = {infoCardData.vehicleName}
+            dealer = {infoCardData.dealer}
+            taxes = {taxes}
+            monthlyPayment = {monthlyPayment}
+          />
+        </fieldset>
+      </form>
     );
   }
 }

@@ -1,3 +1,5 @@
+import './select.scss';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,6 +14,7 @@ class Select extends React.Component {
         value = {value}
         onChange = {onChange}
         name = {propertyName}
+        className = 'select'
       >
         {valueList.map((item, index) => (
           <option value = {item} key = {index}>

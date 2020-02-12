@@ -1,10 +1,10 @@
-.label {
-  position: relative;
-}
+.list {
+  display: flex;
+  flex-wrap: wrap;
 
-.beforeSign {
-  position: absolute;
-  left: 5px;
-  top: 21px;
-  z-index: 2;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 16px;
+
+  list-style: none;
 }

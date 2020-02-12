@@ -1,0 +1,8 @@
+.select {
+  &:focus,
+  &:hover,
+  &:active {
+    background-color: lightgray;
+    outline-color: rgb(83, 75, 75);
+  }
+}

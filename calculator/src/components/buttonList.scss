@@ -1,5 +1,15 @@
-.button-active {
-  color: blue;
+.button {
+  &:focus,
+  &:hover,
+  &:active {
+    color: white;
+    background-color: rgb(83, 75, 75);
+    outline-color: white;
+  }
 
-  background-color: yellow;
+  &-active {
+    color: white;
+
+    background-color: gray;
+  };
 }

@@ -25,9 +25,7 @@ class InputList extends React.Component {
                 name = {item}
                 onChange = {handleChange}
                 className = {`input ${folder}--input ${folder}--input-${item}${validationError[item] ? ' error' : ''}`}
-                // className = {validationError[item] ? 'error' : ''}
                 min = {0}
-                max = {999999999}
               />
             </label>
           </p>
