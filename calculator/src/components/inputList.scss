@@ -1,0 +1,27 @@
+.error {
+  color: red;
+}
+
+.label {
+  position: relative;
+}
+
+.input {
+  display: inline-block;
+  width: 90%;
+  padding-left: 20px;
+
+  &:focus,
+  &:hover,
+  &:active {
+    background-color: lightgray;
+    outline-color: rgb(83, 75, 75);
+  }
+}
+
+.beforeSign {
+  position: absolute;
+  left: 5px;
+  top: 21px;
+  z-index: 2;
+}
