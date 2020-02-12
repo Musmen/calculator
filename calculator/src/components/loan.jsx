@@ -1,10 +1,10 @@
-import './loan.scss';
+// import './loan.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import InputList from './inputList';
-import ButtonsList from './buttonsList';
+import InputList from './inputList.jsx';
+import ButtonsList from './buttonsList.jsx';
 
 class Loan extends React.Component {
   // renderAprInput() {
@@ -62,11 +62,13 @@ class Loan extends React.Component {
         />
         {this.props.renderAprInput(this.props.apr, this.props.handleChange)}
         <br/>
+        Terms:
         <ul style={{ display: 'flex', listStyle: 'none' }}>
-          Terms: {TermsButtonsList}
+          {TermsButtonsList}
         </ul>
+        Credit Score:
         <ul style={{ display: 'flex', listStyle: 'none' }}>
-          Credit Score: {CreditScoresButtonsList}
+          {CreditScoresButtonsList}
         </ul>
       </form>
     );

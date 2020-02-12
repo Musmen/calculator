@@ -5,11 +5,11 @@ import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Loan from '../../components/loan';
-import Lease from '../../components/lease';
-import InfoCard from '../../components/infoCard';
-import FolderButtons from '../../components/folderButtons';
-import Spinner from '../../components/spinner';
+import Loan from '../../components/loan.jsx';
+import Lease from '../../components/lease.jsx';
+import InfoCard from '../../components/infoCard.jsx';
+import FolderButtons from '../../components/folderButtons.jsx';
+import Spinner from '../../components/spinner.jsx';
 import AprInput from '../../components/aprInput.jsx';
 
 import MOCH_INFO_CARD_DATA from './data/mochInfoCardData';

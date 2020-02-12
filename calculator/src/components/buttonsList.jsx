@@ -1,22 +1,29 @@
+import './buttonList.scss';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
 class ButtonsList extends React.Component {
   render() {
     const {
-      valueList, folderName, propertyName, onClick,
+      valueList, folderName, propertyName, onClick, value,
     } = this.props;
 
     return (
       <>
-        {valueList.map((item, index) => ( // todo in dependant of value set activeState
+        {valueList.map((item, index) => (
           <li key = {index}>
             <button
               type = 'button'
               value = {item}
               name = {propertyName}
               onClick = {onClick}
-              className = {`button ${folderName}--button ${folderName}--button-${propertyName}${item}`}
+              className = {
+                `button
+                ${folderName}--button
+                ${folderName}--button-${propertyName}${item}
+                ${value === item ? 'button-active' : ''}`
+              }
             >
               {item}
             </button>

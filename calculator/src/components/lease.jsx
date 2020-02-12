@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import InputList from './inputList';
-import Select from './select';
+import InputList from './inputList.jsx';
+import Select from './select.jsx';
 
 class Lease extends React.Component {
   render() {
