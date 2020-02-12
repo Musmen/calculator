@@ -10,6 +10,7 @@ import Lease from '../../components/lease';
 import InfoCard from '../../components/infoCard';
 import FolderButtons from '../../components/folderButtons';
 import Spinner from '../../components/spinner';
+import AprInput from '../../components/aprInput.jsx';
 
 import MOCH_INFO_CARD_DATA from './data/mochInfoCardData';
 import { getTaxes, calculateLoanMonthlyPayment, calculateLeaseMonthlyPayment } from './data/utils';
@@ -195,6 +196,7 @@ class Calculator extends React.Component {
         handleChange = {this.handleChange}
         handleClick = {this.handleClick}
         validationError = {validationError}
+        renderAprInput = {AprInput}
       />;
     } else {
       mainFolder = <Lease

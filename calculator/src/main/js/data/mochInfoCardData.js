@@ -4,7 +4,7 @@ const MOCH_INFO_CARD_DATA = {
   dealer: {
     name: 'John Doyle',
     phone: '+555-22-555-78',
-    rating: 'excellent',
+    rating: 'excellent (5/5)',
   },
 };
 

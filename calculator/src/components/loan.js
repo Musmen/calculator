@@ -7,28 +7,28 @@ import InputList from './inputList';
 import ButtonsList from './buttonsList';
 
 class Loan extends React.Component {
-  renderAprInput() {
-    return (
-      <>
-      <p>
-        <label className = 'label'>
-          Apr<br/>
-          <span className = 'beforeSign'>%</span>
-          <input
-            className = 'input loan--input loan--input-apr'
-            type = 'number'
-            value = {this.props.apr}
-            name = 'apr'
-            onChange = {this.props.handleChange}
-            min = {0}
-            max = {999999999}
-          >
-          </input>
-        </label>
-      </p>
-      </>
-    );
-  }
+  // renderAprInput() {
+  //   return (
+  //     <>
+  //     <p>
+  //       <label className = 'label'>
+  //         Apr<br/>
+  //         <span className = 'beforeSign'>%</span>
+  //         <input
+  //           className = 'input loan--input loan--input-apr'
+  //           type = 'number'
+  //           value = {this.props.apr}
+  //           name = 'apr'
+  //           onChange = {this.props.handleChange}
+  //           min = {0}
+  //           max = {999999999}
+  //         >
+  //         </input>
+  //       </label>
+  //     </p>
+  //     </>
+  //   );
+  // }
 
   render() {
     const termList = [12, 24, 36, 48, 72, 84];
@@ -60,7 +60,7 @@ class Loan extends React.Component {
           folder = 'loan'
           validationError = {this.props.validationError}
         />
-        {this.renderAprInput()}
+        {this.props.renderAprInput(this.props.apr, this.props.handleChange)}
         <br/>
         <ul style={{ display: 'flex', listStyle: 'none' }}>
           Terms: {TermsButtonsList}
@@ -83,6 +83,7 @@ Loan.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   validationError: PropTypes.object,
+  renderAprInput: PropTypes.func.isRequired,
 };
 
 export default Loan;

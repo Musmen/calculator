@@ -1,5 +1,8 @@
 function getTaxes(postCode) {
-  return postCode.toString().split('').map((item) => `${(item * 11) || ''} `);
+  return postCode.toString().split('').map((item) => {
+    if (!Number.isInteger(+item)) return '';
+    return `${item * 11} `;
+  });
 }
 
 function calculateCreditValue(creditScore) {

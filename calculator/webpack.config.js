@@ -13,41 +13,42 @@ const config = {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.html$/,
         use: [{
           loader: 'html-loader',
           options: {
-            minimize: false
-          }
-        }]
+            minimize: false,
+          },
+        }],
       },
       {
-        test: /\.m?js$/,
+        test: /\.m?(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-               {
-                 loader: MiniCssExtractPlugin.loader
-               },
-               {
-                 loader: "css-loader",
-               },
-               {
-                 loader: "postcss-loader"
-               },
-               {
-                 loader: "sass-loader",
-                 options: {
-                   implementation: require("sass")
-                 }
-               }
-             ]
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
+        ],
       },
       {
         test: /\.(jpg|png|svg|gif)$/,
@@ -55,19 +56,19 @@ const config = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: './assets/img/'
-            }
+              outputPath: './assets/img/',
+            },
           },
           {
             loader: 'image-webpack-loader',
             options: {
               mozjpeg: {
                 processive: true,
-                quality: 98
-              }
-            }
-          }
-        ]
+                quality: 98,
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|ttf|otf|eot)$/,
@@ -75,10 +76,10 @@ const config = {
           loader: 'file-loader',
           options: {
             outputPath: './assets/fonts/',
-          }
-        }]
-      }
-    ]
+          },
+        }],
+      },
+    ],
   },
 
   plugins: [
@@ -94,8 +95,8 @@ const config = {
     }),
     new CopyWebpackPlugin([
       {
-        from: "./src/main/assets/favicon/",
-        to: "./assets/favicon",
+        from: './src/main/assets/favicon/',
+        to: './assets/favicon',
       },
     ]),
   ],
@@ -104,8 +105,8 @@ const config = {
     compress: true,
     port: 3000,
     stats: 'errors-only',
-    clientLogLevel: 'none'
-  }
-}
+    clientLogLevel: 'none',
+  },
+};
 
 module.exports = config;
